@@ -22,6 +22,7 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports": true
   },
-  "css.customData": [".vscode/css_custom_data.json"],
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "css.customData": [
+    ".vscode/css_custom_data.json"
+  ]
 }
