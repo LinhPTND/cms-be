@@ -1,0 +1,14 @@
+import {{moduleName.camel}}Locales from "@/modules/{{moduleName.camel}}/locales";
+import {{moduleName.pascal}}RoutePaths from "@/modules/{{moduleName.camel}}/router/paths";
+import route from "@/modules/{{moduleName.camel}}/router/routes";
+
+const module: AppModule = {
+  name: "{{moduleName.pascal}}",
+  router: {
+    path: {{moduleName.pascal}}RoutePaths,
+    route,
+  },
+  locales: {{moduleName.camel}}Locales,
+};
+
+export default module;

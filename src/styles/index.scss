@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css");
+@import url("https://fonts.googleapis.com/css2?family=Bangers&family=Carter+One&family=Chewy&family=Crafty+Girls&family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Julius+Sans+One&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,700;1,900&family=Lobster&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Mystery+Quest&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Oswald:wght@200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Poiret+One&family=Quicksand:wght@300;400;500;600;700&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Righteous&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Unica+One&family=Varela+Round&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
+
+* {
+  box-sizing: border-box;
+  font-family: "Roboto";
+}
+
+:root {
+  --border-divider: 1px solid theme("colors.border");
+}
+
+// custom css duplicate in page
+.title-page {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+}
+
+.mask {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: #7a7d80;
+
+  &-success {
+    background: #71dd8e;
+  }
+
+  &-default {
+    background: #e5eaee;
+  }
+}
+
+label {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.25rem;
+  margin-bottom: 4px;
+}
+
+.ant-radio-group {
+  .ant-radio-wrapper {
+    &:not(:last-child) {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+.ant-input-number {
+  width: 100%;
+}
+
+.ql-container {
+  min-height: 100px;
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #dcdcdc;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #7797d2;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #8ba9e0;
+}

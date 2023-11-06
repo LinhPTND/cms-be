@@ -1,0 +1,66 @@
+@date-picker-dropdown-width: 290px;
+@date-picker-cell-in-range-bg-ligten-percent: 70%;
+
+.ant-picker {
+  @apply w-full;
+
+  &.ant-picker-focused {
+    box-shadow: @input-focused-shadow-base;
+  }
+
+  &-dropdown {
+    .ant-picker-date-panel {
+      width: @date-picker-dropdown-width + @date-picker-dropdown-width * 0.1;
+
+      .ant-picker-content {
+        width: @date-picker-dropdown-width;
+      }
+
+      .ant-picker-cell {
+        @apply px-1 w-11;
+
+        &::before,
+        &::after {
+          @apply h-9 !important;
+        }
+
+        &-inner {
+          @apply w-9 h-9 flex items-center justify-center;
+        }
+
+        &.ant-picker-cell-range-start:not(.ant-picker-cell-range-end) {
+          .ant-picker-cell-inner {
+            @apply rounded-l-2xl;
+          }
+        }
+
+        &.ant-picker-cell-range-end:not(.ant-picker-cell-range-start) {
+          .ant-picker-cell-inner {
+            @apply rounded-r-2xl;
+          }
+        }
+
+        &.ant-picker-cell-in-range,
+        &.ant-picker-cell-range-end,
+        &.ant-picker-cell-range-start {
+          &::before {
+            background-color: lighten(
+              @primary-color,
+              @date-picker-cell-in-range-bg-ligten-percent
+            );
+          }
+        }
+
+        &.ant-picker-cell-range-hover-start,
+        &.ant-picker-cell-range-hover-end {
+          .ant-picker-cell-inner::after {
+            background-color: lighten(
+              @primary-color,
+              @date-picker-cell-in-range-bg-ligten-percent - 10%
+            );
+          }
+        }
+      }
+    }
+  }
+}

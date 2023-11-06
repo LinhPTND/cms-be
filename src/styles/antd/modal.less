@@ -1,0 +1,22 @@
+@modal-border-radius-base: @border-radius-base * 2;
+
+.ant-modal {
+  
+  &-content {
+    border-radius: @modal-border-radius-base;
+  }
+  
+  &-header {
+    border-radius: @modal-border-radius-base @modal-border-radius-base 0 0;
+    @apply p-5;
+  }
+  
+  &-footer {
+    border-radius: 0 0 @modal-border-radius-base @modal-border-radius-base;
+    @apply p-4;
+  }
+  
+  &-body {
+    @apply p-5;
+  }
+}

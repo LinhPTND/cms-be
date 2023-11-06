@@ -1,0 +1,12 @@
+import {{moduleName.camel}}Locales from "@/modules/{{moduleName.camel}}/locales";
+import {{moduleName.pascal}}RoutePaths from "@/modules/{{moduleName.camel}}/router/paths";
+
+declare global {
+  interface RoutePaths {
+    {{moduleName.pascal}}: typeof {{moduleName.pascal}}RoutePaths;
+  }
+  
+  interface Localization {
+    {{moduleName.camel}}: typeof {{moduleName.camel}}Locales.vi;
+  }
+}

@@ -1,0 +1,19 @@
+import {{moduleName.pascal}}RoutePaths from "@/modules/{{moduleName.camel}}/router/paths";
+import { RouteRecordRaw } from "vue-router";
+
+const route: RouteRecordRaw = {
+  path: {{moduleName.pascal}}RoutePaths.Index,
+  component: () => import("@/layouts/MainLayout/Index.vue"),
+  meta: {
+    title: "{{moduleName.pascal}}",
+    showChildrenInMenu: false,
+  },
+  children: [
+    {
+      path: {{moduleName.pascal}}RoutePaths.Index,
+      component: () => import("@/modules/{{moduleName.camel}}/views/{{moduleName.pascal}}Index.vue"),
+    },
+  ],
+};
+
+export default route;

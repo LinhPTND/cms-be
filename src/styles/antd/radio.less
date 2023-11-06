@@ -1,0 +1,25 @@
+.ant-radio {
+  &-inner {
+    border-width: 2px;
+  }
+  &-wrapper {
+    flex-wrap: nowrap;
+  }
+
+  &-group {
+    &.radio-group-button-seperate {
+      .ant-radio-button-wrapper {
+        border-radius: @border-radius-base;
+        border-left-width: 1px;
+
+        &::before {
+          display: none;
+        }
+      }
+
+      .ant-radio-button-wrapper + .ant-radio-button-wrapper {
+        margin-left: 0.5rem;
+      }
+    }
+  }
+}
