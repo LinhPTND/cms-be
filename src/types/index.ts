@@ -7,6 +7,7 @@ export enum Majors {
   SECURITY = "An toàn thông tin",
   IT = "Công nghệ thông tin",
   Electronic = "Điện tử viễn thông",
+  Sale = "Nhân viên tư vấn bán hàng",
 }
 
 export enum AccountType {

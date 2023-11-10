@@ -18,7 +18,6 @@ export async function loginController(
 
     const account = await AccountModel.findOne({
       username,
-      type,
     });
 
     if (!account) {

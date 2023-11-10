@@ -164,6 +164,7 @@ export async function getUserByMsv(
   res: Response
 ) {
   try {
+      console.log(res)
     const user = await UserModel.findOne({ msv: req.params.msv });
     return res.send({ success: true, data: user });
   } catch (error) {

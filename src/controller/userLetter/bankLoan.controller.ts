@@ -14,8 +14,6 @@ import RSAService from "../../service/Rsa";
 import { getCodeOtp, sendOTPLetter } from "../../utils/otp";
 import { createBankLoanInput } from "./../../schema/letters/bankLoan.schema";
 
-// Đơn xác nhận tiếp tục học
-
 export async function createBankLoanLetter(
   req: Request<{}, {}, createBankLoanInput>,
   res: Response

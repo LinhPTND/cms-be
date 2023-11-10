@@ -11,7 +11,7 @@ import argon2 from "argon2";
 import { AccountType } from "../types";
 import log from "../utils/logger";
 
-const hashPassword = async (password: string) => {
+export const hashPassword = async (password: string) => {
   const hash = await argon2.hash(password);
   return hash;
 };
