@@ -76,7 +76,7 @@ export async function createUserHandler(
     const birthDayGen = dayjs(user.birthDay).format("DDMMYYYY");
     const payloadUpdate = {
       username: user.msv.toUpperCase(),
-      password: `${birthDayGen}${user.msv.toLowerCase()}`,
+      password: `${birthDayGen}`,
       type: "user",
     };
     const newAccount = await AccountModel.findOneAndUpdate(

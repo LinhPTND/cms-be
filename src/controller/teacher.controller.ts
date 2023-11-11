@@ -79,7 +79,7 @@ export async function createTeacherHandler(
 
     const payloadUpdate = {
       username: `${teacher.phone}`,
-      password: `111111`,
+        password: `${birthDayGen}`,
       type: "teacher",
     };
     const newAccount = await AccountModel.findOneAndUpdate(
