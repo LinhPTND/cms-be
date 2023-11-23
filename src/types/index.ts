@@ -18,8 +18,11 @@ export enum AccountType {
 
 export enum StatusLetter {
   PENDING = "pending",
-  REJECT = "reject",
+  CONFIRM = "confirm",
+  RECONFIRM = "re_confirm",
   SUCCESS = "success",
+  APPROVED = "approved",
+  REJECT = "reject",
 }
 
 export enum TuitionType {

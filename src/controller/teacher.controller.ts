@@ -110,6 +110,57 @@ export async function createTeacherHandler(
   }
 }
 
+export async function createListTeacherHandler(
+  req: Request<{}, {}, createTeacherSchemaInput[]>,
+  res: Response
+) {
+  const bodies =Object.values(req.body); // Assuming an array of teacher objects
+  console.log(bodies);
+  try {
+    const createdTeachers = [];
+    const createdAccounts = [];
+
+    for (const body of bodies) {
+      const teacher = await TeacherModel.create(body);
+      const birthDayGen = dayjs(teacher.birthDay).format("DDMMYYYY");
+      const payloadUpdate = {
+        username: `${teacher.phone}`,
+        password: `${birthDayGen}`,
+        type: "teacher",
+      };
+
+      const newAccount = await AccountModel.findOneAndUpdate(
+        {
+          username: `${teacher.phone}`,
+        },
+        payloadUpdate,
+        {
+          new: true,
+          upsert: true,
+        }
+      );
+
+      const ac = omit(newAccount.toJSON(), ["password"]);
+
+      createdTeachers.push(teacher);
+      createdAccounts.push(ac);
+    }
+
+    return res.send({
+      success: true,
+      data: {
+        teachers: createdTeachers,
+        accounts: createdAccounts,
+      },
+    });
+  } catch (error) {
+    return res.status(500).send({
+      success: false,
+      data: error,
+    });
+  }
+}
+
 export async function getTeacherById(
   req: Request<RequestParams>,
   res: Response

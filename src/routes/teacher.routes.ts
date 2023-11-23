@@ -1,6 +1,6 @@
 import express from "express";
 import {
-  changePasswordTeacher,
+  changePasswordTeacher, createListTeacherHandler,
   createTeacherHandler,
   deleteTeacherById,
   getAllLetterApply,
@@ -14,8 +14,9 @@ import { requestParamsSchema } from "../schema/shared.schema";
 import {
   changePasswordUpdateTeacherSchema,
   createTeacherSchema,
+  payloadCreateListTeacherSchema
 } from "../schema/teacher.schema";
-import { updateTeacherSchema } from "./../schema/teacher.schema";
+import { updateTeacherSchema } from "../schema/teacher.schema";
 
 const router = express.Router();
 
@@ -31,6 +32,12 @@ router.post(
   "/api/teachers",
   [permissionTeacher, validateResource(createTeacherSchema)],
   createTeacherHandler
+);
+
+router.post(
+  "/api/create-list-teachers",
+  [permissionTeacher],
+  createListTeacherHandler
 );
 
 router.put(

@@ -1,4 +1,4 @@
-import { number, object, string, TypeOf } from "zod";
+import { array, number, object, string, TypeOf } from "zod";
 import { regexDate } from "../utils/regex";
 
 const payloadCreate = {
@@ -21,6 +21,27 @@ const payloadCreate = {
     address: string({ invalid_type_error: "address is string" }).optional(),
   }),
 };
+
+export const payloadCreateListTeacherSchema = object({
+  body: array(object({
+    name: string({
+      required_error: "name is required",
+      invalid_type_error: "name must be string",
+    }),
+    phone: string({
+      required_error: "phone is required",
+      invalid_type_error: "phone is string",
+    }),
+    birthDay: string({
+      required_error: "birthDay required",
+    }).refine((val) => regexDate.test(val), {
+      message: "date is type YYYY-MM-DD",
+    }),
+    email: string().email("Not a valid email"),
+    age: number({ invalid_type_error: "age is number" }).optional(),
+    address: string({ invalid_type_error: "address is string" }).optional(),
+  })),
+});
 
 const payloadUpdate = {
   body: object({

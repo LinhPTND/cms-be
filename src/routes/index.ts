@@ -16,8 +16,10 @@ import PaymentGraduationPersonRouter from "./userLetters/paymentGraduationPerson
 import RenewStudentCardRouter from "./userLetters/renewStudentCard.routes";
 import ReservationAcademicRouter from "./userLetters/reservationAcademic.routes";
 import ResolveWorkRouter from "./userLetters/resolveWork.routes";
-
+import AdminRoutes from "./admin.routes";
 const router = express.Router();
+
+router.use(AdminRoutes);
 
 router.use(AuthRouter);
 
