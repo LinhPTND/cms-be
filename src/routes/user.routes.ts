@@ -1,6 +1,6 @@
 import express from "express";
 import {
-  changePasswordUser,
+  changePasswordUser, createListUserHandler,
   createUserHandler,
   deleteUser,
   getAllLetter,
@@ -38,6 +38,12 @@ router.post(
   "/api/users",
   [permissionUser, validateResource(createUserSchema)],
   createUserHandler
+);
+
+router.post(
+  "/api/create-list-user",
+  [permissionUser],
+  createListUserHandler
 );
 
 router.put(

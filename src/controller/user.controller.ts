@@ -107,6 +107,67 @@ export async function createUserHandler(
   }
 }
 
+export async function createListUserHandler(
+  req: Request<{}, {}, CreateUserInput[]>,
+  res: Response
+) {
+  const bodies = Object.values(req.body); // Assuming an array of user objects
+
+  try {
+    const createdUsers = [];
+    const createdAccounts = [];
+
+    for (const body of bodies) {
+      const dateCitizenId = body.dateCitizenId
+        ? new Date(body.dateCitizenId)
+        : undefined;
+      const payload = {
+        ...body,
+        birthDay: new Date(body.birthDay),
+        dateCitizenId,
+      };
+
+      const user = await createUser(payload);
+      const birthDayGen = dayjs(user.birthDay).format("DDMMYYYY");
+
+      const payloadUpdate = {
+        username: user.msv.toUpperCase(),
+        password: `${birthDayGen}`,
+        type: "user",
+      };
+
+      const newAccount = await AccountModel.findOneAndUpdate(
+        {
+          username: user.msv,
+        },
+        payloadUpdate,
+        {
+          new: true,
+          upsert: true,
+        }
+      );
+
+      const ac = omit(newAccount.toJSON(), ["password"]);
+
+      createdUsers.push(user);
+      createdAccounts.push(ac);
+    }
+
+    return res.send({
+      success: true,
+      data: {
+        users: createdUsers,
+        accounts: createdAccounts,
+      },
+    });
+  } catch (e: any) {
+    return res.status(500).send({
+      success: false,
+      data: e,
+    });
+  }
+}
+
 export async function updateUser(
   req: Request<UpdateUserInput["params"], {}, UpdateUserInput["body"]>,
   res: Response

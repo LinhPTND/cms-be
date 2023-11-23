@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllLetter = exports.changePasswordUser = exports.deleteUser = exports.getUserByMsv = exports.updateUser = exports.createUserHandler = exports.getListUsers = void 0;
+exports.getAllLetter = exports.changePasswordUser = exports.deleteUser = exports.getUserByMsv = exports.updateUser = exports.createListUserHandler = exports.createUserHandler = exports.getListUsers = void 0;
 const dayjs_1 = __importDefault(require("dayjs"));
 const lodash_1 = require("lodash");
 const account_model_1 = __importDefault(require("../model/account.model"));
@@ -96,6 +96,51 @@ function createUserHandler(req, res) {
     });
 }
 exports.createUserHandler = createUserHandler;
+function createListUserHandler(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const bodies = Object.values(req.body); // Assuming an array of user objects
+        try {
+            const createdUsers = [];
+            const createdAccounts = [];
+            for (const body of bodies) {
+                const dateCitizenId = body.dateCitizenId
+                    ? new Date(body.dateCitizenId)
+                    : undefined;
+                const payload = Object.assign(Object.assign({}, body), { birthDay: new Date(body.birthDay), dateCitizenId });
+                const user = yield (0, user_service_1.createUser)(payload);
+                const birthDayGen = (0, dayjs_1.default)(user.birthDay).format("DDMMYYYY");
+                const payloadUpdate = {
+                    username: user.msv.toUpperCase(),
+                    password: `${birthDayGen}`,
+                    type: "user",
+                };
+                const newAccount = yield account_model_1.default.findOneAndUpdate({
+                    username: user.msv,
+                }, payloadUpdate, {
+                    new: true,
+                    upsert: true,
+                });
+                const ac = (0, lodash_1.omit)(newAccount.toJSON(), ["password"]);
+                createdUsers.push(user);
+                createdAccounts.push(ac);
+            }
+            return res.send({
+                success: true,
+                data: {
+                    users: createdUsers,
+                    accounts: createdAccounts,
+                },
+            });
+        }
+        catch (e) {
+            return res.status(500).send({
+                success: false,
+                data: e,
+            });
+        }
+    });
+}
+exports.createListUserHandler = createListUserHandler;
 function updateUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { msv } = req.params;

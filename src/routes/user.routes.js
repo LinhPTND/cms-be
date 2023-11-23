@@ -13,6 +13,7 @@ const router = express_1.default.Router();
 router.get("/api/users", [permissionUser_1.default, (0, validateResource_1.default)(shared_schema_1.queryGetListSchema)], user_controller_1.getListUsers);
 router.get("/api/user/:msv", [permissionUser_1.default, (0, validateResource_1.default)(user_schema_1.getUserMsvSchema)], user_controller_1.getUserByMsv);
 router.post("/api/users", [permissionUser_1.default, (0, validateResource_1.default)(user_schema_1.createUserSchema)], user_controller_1.createUserHandler);
+router.post("/api/create-list-user", [permissionUser_1.default], user_controller_1.createListUserHandler);
 router.put("/api/users/changePassword", [permissionUser_1.default, (0, validateResource_1.default)(user_schema_1.changePasswordUpdateSchema)], user_controller_1.changePasswordUser);
 router.put("/api/users/:msv", [permissionUser_1.default, (0, validateResource_1.default)(user_schema_1.updateUserSchema)], user_controller_1.updateUser);
 router.delete("/api/users/:msv", [permissionUser_1.default, (0, validateResource_1.default)(user_schema_1.deleteUserSchema)], user_controller_1.deleteUser);
