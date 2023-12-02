@@ -47,7 +47,7 @@ exports.createEnjoyPolicySchema = (0, zod_1.object)({
             .optional(),
         class: (0, zod_1.string)().optional(),
         majors: zod_1.default
-            .enum(["An toàn thông tin", "Công nghệ thông tin", "Điện tử viễn thông"])
+            .enum(["An toàn thông tin", "Công nghệ thông tin", "Điện tử viễn thông", "Nhân viên tư vấn bán hàng"])
             .optional(),
         course: (0, zod_1.array)((0, zod_1.string)().refine((val) => regex_1.regexMonth.test(val), {
             message: "course is type YYYY-MM",

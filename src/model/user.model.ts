@@ -21,6 +21,7 @@ export class User {
   @prop({ type: String, required: true })
   name: string;
 
+
   @prop({ type: String, required: true, unique: true, uppercase: true })
   msv: string;
 
@@ -71,6 +72,9 @@ export class User {
 
   @prop({ type: String })
   parentPhone?: string;
+
+  @prop({ type: Number })
+  balance?: number;
 
   public static async findByMSV(
     this: ReturnModelType<typeof User>,

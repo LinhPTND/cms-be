@@ -101,6 +101,10 @@ __decorate([
     (0, typegoose_1.prop)({ type: String }),
     __metadata("design:type", String)
 ], User.prototype, "parentPhone", void 0);
+__decorate([
+    (0, typegoose_1.prop)({ type: Number }),
+    __metadata("design:type", Number)
+], User.prototype, "balance", void 0);
 User = User_1 = __decorate([
     (0, typegoose_1.index)({ msv: 1 }, { unique: true }),
     (0, typegoose_1.modelOptions)({

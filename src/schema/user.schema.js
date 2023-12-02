@@ -48,7 +48,7 @@ const requestPayload = {
         class: (0, zod_1.string)({
             required_error: "Class is required",
         }),
-        majors: zod_1.default.enum(["An toàn thông tin", "Công nghệ thông tin", "Điện tử viễn thông"], {
+        majors: zod_1.default.enum(["An toàn thông tin", "Công nghệ thông tin", "Điện tử viễn thông", "Nhân viên tư vấn bán hàng"], {
             required_error: "Majors is required",
         }),
         age: (0, zod_1.number)({
@@ -98,7 +98,7 @@ exports.updateUserSchema = (0, zod_1.object)(Object.assign(Object.assign({}, req
         phone: (0, zod_1.string)().optional(),
         class: (0, zod_1.string)().optional(),
         majors: zod_1.default
-            .enum(["An toàn thông tin", "Công nghệ thông tin", "Điện tử viễn thông"])
+            .enum(["An toàn thông tin", "Công nghệ thông tin", "Điện tử viễn thông", "Nhân viên tư vấn bán hàng"])
             .optional(),
         age: (0, zod_1.number)({
             invalid_type_error: "Age must be number",
@@ -118,6 +118,10 @@ exports.updateUserSchema = (0, zod_1.object)(Object.assign(Object.assign({}, req
         permanentResidence: (0, zod_1.string)().optional(),
         parentName: (0, zod_1.string)().optional(),
         parentPhone: (0, zod_1.string)().optional(),
+        balance: (0, zod_1.number)({
+            invalid_type_error: "Balance must be number",
+        })
+            .optional(),
     }) }));
 exports.changePasswordUpdateSchema = (0, zod_1.object)({
     body: (0, zod_1.object)({

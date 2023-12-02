@@ -53,7 +53,7 @@ exports.createConfirmStudyingSchema = (0, zod_1.object)({
         }),
         permanentResidence: (0, zod_1.string)(),
         address: (0, zod_1.string)(),
-        majors: zod_1.default.enum(["An toàn thông tin", "Công nghệ thông tin", "Điện tử viễn thông"], {
+        majors: zod_1.default.enum(["An toàn thông tin", "Công nghệ thông tin", "Điện tử viễn thông", "Nhân viên tư vấn bán hàng"], {
             required_error: "Majors is required",
         }),
         semester: (0, zod_1.number)({
@@ -108,7 +108,7 @@ exports.updateConfirmStudyingSchema = (0, zod_1.object)({
         permanentResidence: (0, zod_1.string)(),
         address: (0, zod_1.string)(),
         majors: zod_1.default
-            .enum(["An toàn thông tin", "Công nghệ thông tin", "Điện tử viễn thông"])
+            .enum(["An toàn thông tin", "Công nghệ thông tin", "Điện tử viễn thông", "Nhân viên tư vấn bán hàng"])
             .optional(),
         semester: (0, zod_1.number)().optional(),
         class: (0, zod_1.string)().optional(),

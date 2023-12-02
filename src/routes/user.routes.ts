@@ -2,7 +2,7 @@ import express from "express";
 import {
   changePasswordUser, createListUserHandler,
   createUserHandler,
-  deleteUser,
+  deleteUser, depositUser,
   getAllLetter,
   getListUsers,
   getUserByMsv,
@@ -19,6 +19,7 @@ import {
   getUserMsvSchema,
   updateUserSchema,
 } from "./../schema/user.schema";
+import permissionTeacher from "../middleware/teacher.ts/permissionTeacher";
 
 const router = express.Router();
 
@@ -56,6 +57,12 @@ router.put(
   "/api/users/:msv",
   [permissionUser, validateResource(updateUserSchema)],
   updateUser
+);
+
+router.put(
+  "/api/users/balance/:msv",
+  [permissionTeacher, validateResource(deleteUserSchema)],
+  depositUser
 );
 
 router.delete(

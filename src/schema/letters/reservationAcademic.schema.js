@@ -40,7 +40,7 @@ exports.createReservationAcademicSchema = (0, zod_1.object)({
         class: (0, zod_1.string)({
             required_error: "Class is required",
         }),
-        majors: zod_1.default.enum(["An toàn thông tin", "Công nghệ thông tin", "Điện tử viễn thông"], {
+        majors: zod_1.default.enum(["An toàn thông tin", "Công nghệ thông tin", "Điện tử viễn thông", "Nhân viên tư vấn bán hàng"], {
             required_error: "Majors is required",
         }),
         birthDay: (0, zod_1.string)({

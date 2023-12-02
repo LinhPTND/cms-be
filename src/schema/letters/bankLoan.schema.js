@@ -47,7 +47,7 @@ exports.createBankLoanSchema = (0, zod_1.object)({
         dateCitizenId: (0, zod_1.string)().refine((val) => regex_1.regexDate.test(val), {
             message: "date is type YYYY-MM-DD",
         }),
-        majors: zod_1.default.enum(["An toàn thông tin", "Công nghệ thông tin", "Điện tử viễn thông"], {
+        majors: zod_1.default.enum(["An toàn thông tin", "Công nghệ thông tin", "Điện tử viễn thông", "Nhân viên tư vấn bán hàng"], {
             required_error: "Majors is required",
         }),
         course: (0, zod_1.array)((0, zod_1.string)().refine((val) => regex_1.regexMonth.test(val), {

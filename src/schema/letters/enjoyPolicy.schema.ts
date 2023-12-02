@@ -24,7 +24,7 @@ export const createEnjoyPolicySchema = object({
       .optional(),
     class: string().optional(),
     majors: z
-      .enum(["An toàn thông tin", "Công nghệ thông tin", "Điện tử viễn thông"])
+      .enum(["An toàn thông tin", "Công nghệ thông tin", "Điện tử viễn thông", "Nhân viên tư vấn bán hàng"])
       .optional(),
     course: array(
       string().refine((val) => regexMonth.test(val), {

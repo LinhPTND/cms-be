@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllLetter = exports.changePasswordUser = exports.deleteUser = exports.getUserByMsv = exports.updateUser = exports.createListUserHandler = exports.createUserHandler = exports.getListUsers = void 0;
+exports.depositUser = exports.getAllLetter = exports.changePasswordUser = exports.deleteUser = exports.getUserByMsv = exports.updateUser = exports.createListUserHandler = exports.createUserHandler = exports.getListUsers = void 0;
 const dayjs_1 = __importDefault(require("dayjs"));
 const lodash_1 = require("lodash");
 const account_model_1 = __importDefault(require("../model/account.model"));
@@ -379,3 +379,31 @@ function getAllLetter(req, res) {
     });
 }
 exports.getAllLetter = getAllLetter;
+function depositUser(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const { msv } = req.params;
+            const { balance } = req.body;
+            const user = yield user_model_1.default.findByMSV(msv);
+            if (!user) {
+                return res.status(404).send((0, response_1.responseError)("User not found"));
+            } // @ts-ignore
+            user.balance = user.balance + balance;
+            if (user.balance < 0) {
+                user.balance = 0;
+            }
+            const updatedUser = yield user.save();
+            return res.send({
+                success: true,
+                data: updatedUser,
+            });
+        }
+        catch (error) {
+            return res.status(500).send({
+                success: false,
+                data: "Internal Server Error",
+            });
+        }
+    });
+}
+exports.depositUser = depositUser;

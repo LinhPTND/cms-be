@@ -24,7 +24,7 @@ const requestPayload = {
       required_error: "Class is required",
     }),
     majors: z.enum(
-      ["An toàn thông tin", "Công nghệ thông tin", "Điện tử viễn thông"],
+      ["An toàn thông tin", "Công nghệ thông tin", "Điện tử viễn thông", "Nhân viên tư vấn bán hàng"],
       {
         required_error: "Majors is required",
       }
@@ -89,7 +89,7 @@ export const updateUserSchema = object({
     phone: string().optional(),
     class: string().optional(),
     majors: z
-      .enum(["An toàn thông tin", "Công nghệ thông tin", "Điện tử viễn thông"])
+      .enum(["An toàn thông tin", "Công nghệ thông tin", "Điện tử viễn thông", "Nhân viên tư vấn bán hàng"])
       .optional(),
     age: number({
       invalid_type_error: "Age must be number",
@@ -109,6 +109,10 @@ export const updateUserSchema = object({
     permanentResidence: string().optional(),
     parentName: string().optional(),
     parentPhone: string().optional(),
+    balance: number({
+      invalid_type_error: "Balance must be number",
+    })
+      .optional(),
   }),
 });
 

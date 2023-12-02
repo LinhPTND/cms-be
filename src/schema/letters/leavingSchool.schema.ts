@@ -17,7 +17,7 @@ export const createLeavingSchoolSchema = object({
       required_error: "Class is required",
     }),
     majors: z.enum(
-      ["An toàn thông tin", "Công nghệ thông tin", "Điện tử viễn thông"],
+      ["An toàn thông tin", "Công nghệ thông tin", "Điện tử viễn thông", "Nhân viên tư vấn bán hàng"],
       {
         required_error: "Majors is required",
       }

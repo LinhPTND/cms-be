@@ -423,3 +423,33 @@ export async function getAllLetter(
     success: false,
   });
 }
+
+
+export async function depositUser(
+  req: Request<UpdateUserInput["params"], {}, UpdateUserInput["body"]>,
+  res: Response
+) {
+  try {
+    const { msv } = req.params;
+    const {balance} = req.body
+    const user = await UserModel.findByMSV(msv);
+    if (!user) {
+      return res.status(404).send(responseError("User not found"));
+    }// @ts-ignore
+    user.balance = user.balance + balance;
+    if(user.balance < 0) {
+      user.balance = 0
+    }
+    const updatedUser = await user.save();
+    return res.send({
+      success: true,
+      data: updatedUser,
+    });
+  } catch (error) {
+    return res.status(500).send({
+      success: false,
+      data: "Internal Server Error",
+    });
+  }
+}
+
