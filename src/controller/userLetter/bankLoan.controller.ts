@@ -13,6 +13,7 @@ import {
 import RSAService from "../../service/Rsa";
 import { getCodeOtp, sendOTPLetter } from "../../utils/otp";
 import { createBankLoanInput } from "./../../schema/letters/bankLoan.schema";
+import { decreaseUserBalance } from "../../middleware/user/changeBalanceUser";
 
 export async function createBankLoanLetter(
   req: Request<{}, {}, createBankLoanInput>,
@@ -56,21 +57,30 @@ export async function createBankLoanLetter(
     });
 
     if (newLetter) {
-      await UserLetterModel.findOneAndUpdate(
-        { user: user._id },
-        {
-          user: user,
-          $push: { bankLoan: newLetter._id },
-        },
-        {
-          new: true,
-          upsert: true,
-        }
-      );
+      const isBalanceDecreased = await decreaseUserBalance(user);
+      if (isBalanceDecreased) {
+        await UserLetterModel.findOneAndUpdate(
+          { user: user._id },
+          {
+            user: user,
+            $push: { bankLoan: newLetter._id },
+          },
+          {
+            new: true,
+            upsert: true,
+          }
+        );
 
-      return res.send({
-        success: true,
-      });
+        return res.send({
+          success: true,
+        });
+      } else {
+        await BankLoanModel.findByIdAndDelete(newLetter._id);
+        return res.status(400).send({
+          success: false,
+          message: "Insufficient balance for the transaction.",
+        });
+      }
     } else {
       return res.status(500).send({
         success: false,
