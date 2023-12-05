@@ -13,6 +13,8 @@ import {
 } from "../../schema/shared.schema";
 import RSAService from "../../service/Rsa";
 import { getCodeOtp, sendOTPLetter } from "./../../utils/otp";
+import { decreaseUserBalance } from "../../middleware/user/changeBalanceUser";
+import BankLoanModel from "../../model/Letters/bankLoan.model";
 
 // Đơn xác nhận tiếp tục học
 
@@ -57,21 +59,30 @@ export async function createConfirmStudyingLetter(
       hashCode: codeOtp.hashedOtp,
     });
     if (newLetter) {
-      await UserLetterModel.findOneAndUpdate(
-        { user: user._id },
-        {
-          user: user,
-          $push: { confirmStudying: newLetter._id },
-        },
-        {
-          new: true,
-          upsert: true,
-        }
-      );
+      const isBalanceDecreased = await decreaseUserBalance(user);
+      if(isBalanceDecreased) {
+        await UserLetterModel.findOneAndUpdate(
+          { user: user._id },
+          {
+            user: user,
+            $push: { confirmStudying: newLetter._id },
+          },
+          {
+            new: true,
+            upsert: true,
+          }
+        );
 
-      return res.send({
-        success: true,
-      });
+        return res.send({
+          success: true,
+        });
+      } else {
+        await ConfirmStudyingModel.findByIdAndDelete(newLetter._id);
+        return res.status(400).send({
+          success: false,
+          message: "Insufficient balance for the transaction.",
+        });
+      }
     } else {
       return res.status(500).send({
         success: false,

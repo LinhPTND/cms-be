@@ -41,39 +41,11 @@ export const createContinueStudyingSchema = object({
 
     permanentResidence: string(),
 
-    decisionNumber: string(),
-    dateDecisionAssign: string().refine((val) => regexDate.test(val), {
-      message: "date decision assign is type YYYY-MM-DD",
-    }),
-    startDateReservationAcademic: string().refine(
-      (val) => regexDate.test(val),
-      {
-        message: "start date reservation academic is type YYYY-MM-DD",
-      }
-    ),
-
     timeReservationAcademic: number(),
-
-    dateComeback: string().refine((val) => regexDate.test(val), {
-      message: "date comeback is type YYYY-MM-DD",
-    }),
-
-    semester: number({
-      required_error: "semester is required",
-    }),
-    startYear: number({
-      required_error: "start year is required",
-    }),
-
-    endYear: number({
-      required_error: "end year is required",
-    }),
 
     status: z.enum(["pending", "reject", "success"], {
       required_error: "Status is required",
     }),
-
-    approved: string({ required_error: "approved is required" }),
     user: string({ required_error: "user is required" }),
   }),
 });

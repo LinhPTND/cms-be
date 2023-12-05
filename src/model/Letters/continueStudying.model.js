@@ -61,37 +61,13 @@ __decorate([
     __metadata("design:type", String)
 ], ContinueStudying.prototype, "permanentResidence", void 0);
 __decorate([
-    (0, typegoose_1.prop)({ type: String, required: true }),
-    __metadata("design:type", String)
-], ContinueStudying.prototype, "decisionNumber", void 0);
-__decorate([
-    (0, typegoose_1.prop)({ type: Date, required: true }),
-    __metadata("design:type", Date)
-], ContinueStudying.prototype, "dateDecisionAssign", void 0);
-__decorate([
-    (0, typegoose_1.prop)({ type: Date, required: true }),
-    __metadata("design:type", Date)
-], ContinueStudying.prototype, "startDateReservationAcademic", void 0);
-__decorate([
     (0, typegoose_1.prop)({ required: true, enum: index_1.TimeYear }),
     __metadata("design:type", Number)
 ], ContinueStudying.prototype, "timeReservationAcademic", void 0);
 __decorate([
-    (0, typegoose_1.prop)({ required: true, type: Date }),
-    __metadata("design:type", Date)
-], ContinueStudying.prototype, "dateComeback", void 0);
-__decorate([
     (0, typegoose_1.prop)({ type: Number }),
     __metadata("design:type", Number)
 ], ContinueStudying.prototype, "semester", void 0);
-__decorate([
-    (0, typegoose_1.prop)({ required: true, type: Number }),
-    __metadata("design:type", Number)
-], ContinueStudying.prototype, "startYear", void 0);
-__decorate([
-    (0, typegoose_1.prop)({ required: true, type: Number }),
-    __metadata("design:type", Number)
-], ContinueStudying.prototype, "endYear", void 0);
 __decorate([
     (0, typegoose_1.prop)({ required: true, enum: index_1.StatusLetter }),
     __metadata("design:type", String)

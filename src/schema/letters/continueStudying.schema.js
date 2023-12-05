@@ -58,30 +58,10 @@ exports.createContinueStudyingSchema = (0, zod_1.object)({
             message: "date is type YYYY-MM-DD",
         }),
         permanentResidence: (0, zod_1.string)(),
-        decisionNumber: (0, zod_1.string)(),
-        dateDecisionAssign: (0, zod_1.string)().refine((val) => regex_1.regexDate.test(val), {
-            message: "date decision assign is type YYYY-MM-DD",
-        }),
-        startDateReservationAcademic: (0, zod_1.string)().refine((val) => regex_1.regexDate.test(val), {
-            message: "start date reservation academic is type YYYY-MM-DD",
-        }),
         timeReservationAcademic: (0, zod_1.number)(),
-        dateComeback: (0, zod_1.string)().refine((val) => regex_1.regexDate.test(val), {
-            message: "date comeback is type YYYY-MM-DD",
-        }),
-        semester: (0, zod_1.number)({
-            required_error: "semester is required",
-        }),
-        startYear: (0, zod_1.number)({
-            required_error: "start year is required",
-        }),
-        endYear: (0, zod_1.number)({
-            required_error: "end year is required",
-        }),
         status: zod_1.default.enum(["pending", "reject", "success"], {
             required_error: "Status is required",
         }),
-        approved: (0, zod_1.string)({ required_error: "approved is required" }),
         user: (0, zod_1.string)({ required_error: "user is required" }),
     }),
 });

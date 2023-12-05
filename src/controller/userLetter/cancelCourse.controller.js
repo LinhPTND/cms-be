@@ -19,6 +19,7 @@ const user_model_1 = __importDefault(require("../../model/user.model"));
 const userLetter_model_1 = __importDefault(require("../../model/userLetter.model"));
 const Rsa_1 = __importDefault(require("../../service/Rsa"));
 const otp_1 = require("../../utils/otp");
+const changeBalanceUser_1 = require("../../middleware/user/changeBalanceUser");
 // Đơn hủy học phần
 function createCancelCourseLetter(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -51,16 +52,26 @@ function createCancelCourseLetter(req, res) {
             }
             const newLetter = yield cancelCourse_model_1.default.create(Object.assign(Object.assign({}, req.body), { hashCode: codeOtp.hashedOtp }));
             if (newLetter) {
-                yield userLetter_model_1.default.findOneAndUpdate({ user: user._id }, {
-                    user: user,
-                    $push: { cancelCourse: newLetter._id },
-                }, {
-                    new: true,
-                    upsert: true,
-                });
-                return res.send({
-                    success: true,
-                });
+                const isBalanceDecreased = yield (0, changeBalanceUser_1.decreaseUserBalance)(user);
+                if (isBalanceDecreased) {
+                    yield userLetter_model_1.default.findOneAndUpdate({ user: user._id }, {
+                        user: user,
+                        $push: { cancelCourse: newLetter._id },
+                    }, {
+                        new: true,
+                        upsert: true,
+                    });
+                    return res.send({
+                        success: true,
+                    });
+                }
+                else {
+                    yield cancelCourse_model_1.default.findByIdAndDelete(newLetter._id);
+                    return res.status(400).send({
+                        success: false,
+                        message: "Insufficient balance for the transaction.",
+                    });
+                }
             }
             else {
                 return res.status(500).send({

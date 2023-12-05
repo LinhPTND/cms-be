@@ -46,30 +46,30 @@ export class ContinueStudying {
 
   @prop({ type: String, required: true })
   permanentResidence: string;
+  //
+  // @prop({ type: String, required: true })
+  // decisionNumber: string;
 
-  @prop({ type: String, required: true })
-  decisionNumber: string;
+  // @prop({ type: Date, required: true })
+  // dateDecisionAssign: Date;
 
-  @prop({ type: Date, required: true })
-  dateDecisionAssign: Date;
-
-  @prop({ type: Date, required: true })
-  startDateReservationAcademic: Date;
+  // @prop({ type: Date, required: true })
+  // startDateReservationAcademic: Date;
 
   @prop({ required: true, enum: TimeYear })
   timeReservationAcademic: Number;
 
-  @prop({ required: true, type: Date })
-  dateComeback: Date;
+  // @prop({ required: true, type: Date })
+  // dateComeback: Date;
 
   @prop({ type: Number })
   semester: number;
 
-  @prop({ required: true, type: Number })
-  startYear: number;
+  // @prop({ required: true, type: Number })
+  // startYear: number;
 
-  @prop({ required: true, type: Number })
-  endYear: number;
+  // @prop({ required: true, type: Number })
+  // endYear: number;
 
   @prop({ required: true, enum: StatusLetter })
   status: string;
