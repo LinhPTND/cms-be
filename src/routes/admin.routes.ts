@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  getAdminById,
   getAllLetterApply,
 } from "../controller/admin.controller";
 import permissionTeacher from "../middleware/teacher.ts/permissionTeacher";
@@ -13,6 +14,12 @@ router.get(
   "/api/admin/allLetter",
   [permissionTeacher],
   getAllLetterApply
+);
+
+router.get(
+  "/api/admin/:code",
+  [],
+  getAdminById
 );
 
 export default router;

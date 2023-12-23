@@ -22,6 +22,7 @@ const renewStudentCard_routes_1 = __importDefault(require("./userLetters/renewSt
 const reservationAcademic_routes_1 = __importDefault(require("./userLetters/reservationAcademic.routes"));
 const resolveWork_routes_1 = __importDefault(require("./userLetters/resolveWork.routes"));
 const admin_routes_1 = __importDefault(require("./admin.routes"));
+const uploadImage_routes_1 = __importDefault(require("./uploadImage.routes"));
 const router = express_1.default.Router();
 router.use(admin_routes_1.default);
 router.use(auth_routes_1.default);
@@ -41,6 +42,7 @@ router.use(paymentGraduationPerson_routes_1.default);
 router.use(renewStudentCard_routes_1.default);
 router.use(reservationAcademic_routes_1.default);
 router.use(resolveWork_routes_1.default);
+router.use(uploadImage_routes_1.default);
 router.get("/api/me", (req, res) => {
     const account = res.locals.account;
     return res.send({

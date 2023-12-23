@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllLetterApply = void 0;
+exports.getAdminById = exports.getAllLetterApply = void 0;
 const bankLoan_model_1 = __importDefault(require("../model/Letters/bankLoan.model"));
 const confirmStudying_model_1 = __importDefault(require("../model/Letters/confirmStudying.model"));
 const cancelCourse_model_1 = __importDefault(require("../model/Letters/cancelCourse.model"));
@@ -27,6 +27,7 @@ const paymentGraduationPerson_model_1 = __importDefault(require("../model/Letter
 const renewStudentCard_model_1 = __importDefault(require("../model/Letters/renewStudentCard.model"));
 const reservationAcademic_model_1 = __importDefault(require("../model/Letters/reservationAcademic.model"));
 const resolveWork_model_1 = __importDefault(require("../model/Letters/resolveWork.model"));
+const admin_model_1 = __importDefault(require("../model/admin.model"));
 function getAllLetterApply(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { name, msv, status } = req.query;
@@ -68,3 +69,18 @@ function getAllLetterApply(req, res) {
     });
 }
 exports.getAllLetterApply = getAllLetterApply;
+function getAdminById(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const admin = yield admin_model_1.default.find({});
+            return res.send({ success: true, data: admin });
+        }
+        catch (error) {
+            return res.status(500).send({
+                success: false,
+                data: error,
+            });
+        }
+    });
+}
+exports.getAdminById = getAdminById;

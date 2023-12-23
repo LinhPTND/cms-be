@@ -78,6 +78,7 @@ function loginController(req, res) {
                     accessToken,
                     refreshToken,
                     type: account.type,
+                    id: account._id,
                 },
             });
         }

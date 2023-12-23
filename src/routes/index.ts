@@ -17,6 +17,7 @@ import RenewStudentCardRouter from "./userLetters/renewStudentCard.routes";
 import ReservationAcademicRouter from "./userLetters/reservationAcademic.routes";
 import ResolveWorkRouter from "./userLetters/resolveWork.routes";
 import AdminRoutes from "./admin.routes";
+import UploadImageRoutes from "./uploadImage.routes";
 const router = express.Router();
 
 router.use(AdminRoutes);
@@ -54,6 +55,8 @@ router.use(RenewStudentCardRouter);
 router.use(ReservationAcademicRouter);
 
 router.use(ResolveWorkRouter);
+
+router.use(UploadImageRoutes);
 
 router.get("/api/me", (req: Request, res: Response) => {
   const account = res.locals.account;

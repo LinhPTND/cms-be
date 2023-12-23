@@ -14,6 +14,9 @@ import PaymentGraduationPersonModel from "../model/Letters/paymentGraduationPers
 import RenewStudentCardModel from "../model/Letters/renewStudentCard.model";
 import ReservationAcademicModel from "../model/Letters/reservationAcademic.model";
 import ResolveWorkModel from "../model/Letters/resolveWork.model";
+import { GetUserMsvInput } from "../schema/user.schema";
+import UserModel from "../model/user.model";
+import AdminModel from "../model/admin.model";
 
 export async function getAllLetterApply(
   req: Request<
@@ -94,4 +97,19 @@ export async function getAllLetterApply(
     success: true,
     data: listLetter,
   });
+}
+
+export async function getAdminById(
+  req: Request<any>,
+  res: Response
+) {
+  try {
+    const admin = await AdminModel.find({});
+    return res.send({ success: true, data: admin });
+  } catch (error) {
+    return res.status(500).send({
+      success: false,
+      data: error,
+    });
+  }
 }

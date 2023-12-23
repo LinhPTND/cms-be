@@ -71,6 +71,7 @@ export async function loginController(
         accessToken,
         refreshToken,
         type: account.type,
+        id: account._id,
       },
     });
   } catch (error) {

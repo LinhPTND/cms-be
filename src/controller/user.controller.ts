@@ -225,7 +225,6 @@ export async function getUserByMsv(
   res: Response
 ) {
   try {
-      console.log(res)
     const user = await UserModel.findOne({ msv: req.params.msv });
     return res.send({ success: true, data: user });
   } catch (error) {
@@ -424,22 +423,32 @@ export async function getAllLetter(
   });
 }
 
-
 export async function depositUser(
   req: Request<UpdateUserInput["params"], {}, UpdateUserInput["body"]>,
   res: Response
 ) {
   try {
     const { msv } = req.params;
-    const {balance} = req.body
-    const user = await UserModel.findByMSV(msv);
+    const { balance } = req.body;
+    let user = await UserModel.findByMSV(msv);
+
     if (!user) {
-      return res.status(404).send(responseError("User not found"));
-    }// @ts-ignore
-    user.balance = user.balance + balance;
-    if(user.balance < 0) {
-      user.balance = 0
+      // If user not found, create a new user with balance if not provided
+      user = new UserModel({ msv, balance: balance || 0 });
+    } else if (user.balance === undefined) {
+      // If user exists but doesn't have balance property, initialize it
+      user.balance = balance || 0;
+    } else {
+      // Update the balance if the user and balance property exist
+      // @ts-ignore
+      user.balance += balance;
     }
+
+    // @ts-ignore
+    if (user.balance < 0) {
+      user.balance = 0;
+    }
+
     const updatedUser = await user.save();
     return res.send({
       success: true,
@@ -452,4 +461,3 @@ export async function depositUser(
     });
   }
 }
-

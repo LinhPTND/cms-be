@@ -189,7 +189,6 @@ exports.updateUser = updateUser;
 function getUserByMsv(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            console.log(res);
             const user = yield user_model_1.default.findOne({ msv: req.params.msv });
             return res.send({ success: true, data: user });
         }
@@ -384,11 +383,21 @@ function depositUser(req, res) {
         try {
             const { msv } = req.params;
             const { balance } = req.body;
-            const user = yield user_model_1.default.findByMSV(msv);
+            let user = yield user_model_1.default.findByMSV(msv);
             if (!user) {
-                return res.status(404).send((0, response_1.responseError)("User not found"));
-            } // @ts-ignore
-            user.balance = user.balance + balance;
+                // If user not found, create a new user with balance if not provided
+                user = new user_model_1.default({ msv, balance: balance || 0 });
+            }
+            else if (user.balance === undefined) {
+                // If user exists but doesn't have balance property, initialize it
+                user.balance = balance || 0;
+            }
+            else {
+                // Update the balance if the user and balance property exist
+                // @ts-ignore
+                user.balance += balance;
+            }
+            // @ts-ignore
             if (user.balance < 0) {
                 user.balance = 0;
             }
